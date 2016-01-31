@@ -38,7 +38,7 @@ module.exports = React.createClass({
   render: function() {
 
     return (
-      <div>
+      <div className="song__form">
         <h1>Add a song</h1>
         <div className="player"></div>
         <h3>Song Url</h3>
