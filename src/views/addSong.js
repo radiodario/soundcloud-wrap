@@ -1,7 +1,12 @@
 var React = require('react');
 var Firebase = require('firebase');
+var SC = require('soundcloud');
 
 var baseRef = new Firebase('https://soundcloud-wrap.firebaseio.com/');
+
+SC.initialize({
+  client_id: 'b74dfdbbfcb2f6302c489e10180b74fd',
+});
 
 module.exports = React.createClass({
 
@@ -16,7 +21,13 @@ module.exports = React.createClass({
   },
 
   saveSong: function() {
-    baseRef.push(this.state);
+    var that = this;
+    SC.resolve(this.state.song_url)
+    .then(function (song){
+      debugger
+      that.setState(song);
+      baseRef.push(that.state);
+    });
   },
 
   handleUrlChange: function(event) {
@@ -46,7 +57,7 @@ module.exports = React.createClass({
           value={this.state.song_url}
           onChange={this.handleUrlChange}
         />
-        <h3>Song Intensity</h3>
+        <h3>Intensity</h3>
         <input type="range"
           className="intensity-slider"
           type="range"
@@ -57,16 +68,11 @@ module.exports = React.createClass({
           onChange={this.handleIntensityUpdate}
           step="1"
         />
-        <h3>Msg Bar</h3>
-        <input type="text"
-          value={this.state.msg}
-          onChange={this.handleMsgChange}
-        />
-        <h3>Artist Info</h3>
-        <input type="textfield"
-          value={this.state.artist_info}
-          onChange={this.handleArtistInfoChange}
-        />
+        <h3>Info</h3>
+        <pre>
+          {JSON.stringify(this.state, null, 2)}
+        </pre>
+
         <div>
           <button
             onClick={this.saveSong}
