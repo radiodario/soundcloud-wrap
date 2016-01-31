@@ -1,5 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Pragati+Narrow);
+body {
+  font-family: 'Pragati Narrow', helvetica, arial, sans-serif;
+}
+.main {
+  display: flex;
+}
+.song__form {
+  width: 20%;
+}
 .songs__list {
   display: flex;
+  flex-direction: column;
 }
 .song {
   width: 500px;

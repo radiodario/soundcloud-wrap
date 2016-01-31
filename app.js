@@ -19311,7 +19311,7 @@ const ReactDOM = require('react-dom');
 
 
 ReactDOM.render(
-  React.createElement("div", null, 
+  React.createElement("div", {className: "main"}, 
     React.createElement(AddSong, null), 
     React.createElement(SongList, null)
   )
@@ -19375,7 +19375,7 @@ module.exports = React.createClass({displayName: "exports",
   render: function() {
 
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "song__form"}, 
         React.createElement("h1", null, "Add a song"), 
         React.createElement("div", {className: "player"}), 
         React.createElement("h3", null, "Song Url"), 
