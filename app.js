@@ -19337,8 +19337,13 @@ module.exports = {
 },{"firebase":1}],163:[function(require,module,exports){
 var React = require('react');
 var Firebase = require('firebase');
+var SC = require('soundcloud');
 
 var baseRef = new Firebase('https://soundcloud-wrap.firebaseio.com/');
+
+SC.initialize({
+  client_id: 'b74dfdbbfcb2f6302c489e10180b74fd',
+});
 
 module.exports = React.createClass({displayName: "exports",
 
@@ -19353,7 +19358,13 @@ module.exports = React.createClass({displayName: "exports",
   },
 
   saveSong: function() {
-    baseRef.push(this.state);
+    var that = this;
+    SC.resolve(this.state.song_url)
+    .then(function (song){
+      debugger
+      that.setState(song);
+      baseRef.push(that.state);
+    });
   },
 
   handleUrlChange: function(event) {
@@ -19383,7 +19394,7 @@ module.exports = React.createClass({displayName: "exports",
           value: this.state.song_url, 
           onChange: this.handleUrlChange}
         ), 
-        React.createElement("h3", null, "Song Intensity"), 
+        React.createElement("h3", null, "Intensity"), 
         React.createElement("input", {type: "range", 
           className: "intensity-slider", 
           type: "range", 
@@ -19394,16 +19405,11 @@ module.exports = React.createClass({displayName: "exports",
           onChange: this.handleIntensityUpdate, 
           step: "1"}
         ), 
-        React.createElement("h3", null, "Msg Bar"), 
-        React.createElement("input", {type: "text", 
-          value: this.state.msg, 
-          onChange: this.handleMsgChange}
+        React.createElement("h3", null, "Info"), 
+        React.createElement("pre", null, 
+          JSON.stringify(this.state, null, 2)
         ), 
-        React.createElement("h3", null, "Artist Info"), 
-        React.createElement("input", {type: "textfield", 
-          value: this.state.artist_info, 
-          onChange: this.handleArtistInfoChange}
-        ), 
+
         React.createElement("div", null, 
           React.createElement("button", {
             onClick: this.saveSong
@@ -19419,7 +19425,7 @@ module.exports = React.createClass({displayName: "exports",
 })
 
 
-},{"firebase":1,"react":159}],164:[function(require,module,exports){
+},{"firebase":1,"react":159,"soundcloud":160}],164:[function(require,module,exports){
 var SC = require('soundcloud');
 var React = require('react');
 
