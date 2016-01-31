@@ -2,13 +2,14 @@ var React = require('react')
 var Firebase = require('firebase');
 var Song = require('./song');
 var baseRef = new Firebase('https://soundcloud-wrap.firebaseio.com/');
-
+var Player = require('./player');
 
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
       loading: true,
+      selected_song: '',
       songs: []
     };
 
@@ -27,15 +28,23 @@ module.exports = React.createClass({
 
   },
 
+  handlePlaySong: function(song) {
+    debugger;
+    this.setState({selected_song: song.song_url});
+  },
+
   render: function() {
+    var that = this;
     var songs = this.state.songs.map(function (song, i) {
       return (
-        <Song {...song} key={i} />
+        <Song {...song} onPlay={that.handlePlaySong} key={i} />
       );
     });
 
     return (
       <div className="songs">
+        <h2>Player</h2>
+        <Player song={this.state.selected_song}/>
         <h1>Songs</h1>
         <div className="songs__list">
           {songs}

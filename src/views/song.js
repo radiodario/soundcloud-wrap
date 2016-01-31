@@ -7,9 +7,13 @@ module.exports = React.createClass({
     }
   },
 
+  handleClick: function() {
+    this.props.onPlay(this.props);
+  },
+
   render: function() {
     return (
-      <div className="song">
+      <div className="song" onClick={this.handleClick}>
         <div className="song__url">
           {this.props.song_url}
         </div>
