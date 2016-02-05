@@ -29,7 +29,6 @@ module.exports = React.createClass({
   },
 
   handlePlaySong: function(song) {
-    debugger;
     this.setState({selected_song: song.song_url});
   },
 

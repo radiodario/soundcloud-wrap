@@ -1,5 +1,6 @@
 var SC = require('soundcloud');
 var React = require('react');
+var Visualizer = require('./visualizer');
 
 SC.initialize({
   client_id: 'b74dfdbbfcb2f6302c489e10180b74fd',
@@ -19,7 +20,6 @@ module.exports = React.createClass({
   },
 
   loadSong: function(song_url) {
-    debugger;
     if (!song_url) return;
     var that = this;
     SC.resolve(song_url)
@@ -29,20 +29,19 @@ module.exports = React.createClass({
           that.player = player;
           that.player.play();
           console.log("play!");
+					debugger;
           that.setState(song);
         });
     });
   },
 
   handlePlay: function() {
-    debugger;
     if (this.player) {
       this.player.play();
     }
   },
 
   handlePause: function() {
-    debugger;
     if (this.player) {
       this.player.pause();
     }
@@ -52,6 +51,7 @@ module.exports = React.createClass({
 
     return (
       <div className="player">
+				<Visualizer/>
         <h3 className="player__trackName">
           Now Playing: {this.state.title}
         </h3>

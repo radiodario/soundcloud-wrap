@@ -18,10 +18,13 @@
     "url": "git://github.com/radiodario/soundcloud-wrap.git"
   },
   "dependencies": {
+    "firebase": "^2.4.0",
     "history": "^1.17.0",
+    "p5": "^0.4.22",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
-    "react-router": "^1.0.3"
+    "react-router": "^1.0.3",
+    "soundcloud": "^3.1.0"
   },
   "devDependencies": {
     "debowerify": "~0.1.3",
